@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ScenarioContext {
+	
+	// To share data between different steps
 
 	private Map<Object, Object> scenarioContext;
 
