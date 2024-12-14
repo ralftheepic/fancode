@@ -25,10 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "Building branch: ${env.BRANCH_NAME}"
-                    // Print before executing the build
-                    echo "Executing Maven clean package..."
-                    sh 'mvn clean package'
-                    // Log after the build step completes
+                    sh 'mvn clean package' // Avoid using nohup
                     echo "Build completed for branch: ${env.BRANCH_NAME}"
                 }
             }
@@ -39,10 +36,7 @@ pipeline {
                 script {
                     echo "Running tests for branch: ${env.BRANCH_NAME}"
                     if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
-                        // Log before running the tests
-                        echo "Executing Maven test..."
                         sh 'mvn test'
-                        // Log after test execution
                         echo "Tests completed for branch: ${env.BRANCH_NAME}"
                     } else {
                         echo "Skipping tests for branch: ${env.BRANCH_NAME}"
@@ -56,11 +50,8 @@ pipeline {
                 branch 'main'
             }
             steps {
-                // Log before deploying
                 echo "Deploying main branch build."
-                echo "Deployment started for branch: ${env.BRANCH_NAME}"
                 // Add actual deployment steps here as needed.
-                echo "Deployment completed for branch: ${env.BRANCH_NAME}"
             }
         }
     }
