@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        BRANCH_NAME = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+        BRANCH_NAME = bat(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "Building branch: ${env.BRANCH_NAME}"
-                    sh 'mvn clean package' // Avoid using nohup
+                    bat 'mvn clean package' // Avoid using nohup
                     echo "Build completed for branch: ${env.BRANCH_NAME}"
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
                 script {
                     echo "Running tests for branch: ${env.BRANCH_NAME}"
                     if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'develop') {
-                        sh 'mvn test'
+                        bat 'mvn test'
                         echo "Tests completed for branch: ${env.BRANCH_NAME}"
                     } else {
                         echo "Skipping tests for branch: ${env.BRANCH_NAME}"
