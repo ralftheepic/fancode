@@ -16,7 +16,8 @@ pipeline {
                 script {
                     echo "Checking out branch: ${env.BRANCH_NAME} from GitHub repository"
                     // Checkout from the new GitHub repository
-                    git branch: "${env.BRANCH_NAME}", url: 'https://github.com/ralftheepic/fancode.git'
+                    //git branch: "${env.BRANCH_NAME}", url: 'https://github.com/ralftheepic/fancode.git'
+					checkout scm
                 }
             }
         }
